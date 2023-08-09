@@ -1,12 +1,19 @@
 package br.com.arthur.model;
 
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.util.Objects;
-
+@Entity
+@Table(name = "person")
 public class Person implements Serializable {
 
-    private long serialVersionUID = -7134240826619734814L;
+    private static final long serialVersionUID = -7134240826619734814L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column
     private String firstName;
     private String lastName;
     private String address;
