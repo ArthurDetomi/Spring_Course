@@ -28,11 +28,27 @@ public class PersonServices {
 
     public List<Person> findAll() {
         List<Person> persons = new ArrayList<>();
+        logger.info("Listing all peoples");
         for (int i = 0; i < 9; i++) {
             Person person = mockPerson(i);
             persons.add(person);
         }
         return persons;
+    }
+
+    public Person create(Person person) {
+        logger.info("Creating one person");
+        return person;
+    }
+
+    public void delete(String id) {
+        logger.info("Deleting one person");
+    }
+
+
+    public Person update(Person person) {
+        logger.info("Update one person");
+        return person;
     }
 
     private Person mockPerson(int number) {
