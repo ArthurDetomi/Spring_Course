@@ -1,14 +1,19 @@
 spring:
   datasource:
-    dbcp2:
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://127.0.0.1:3306/rest_with_spring_boot_arthur?useTimezone=true&serverTimezone=UTC
-      username: arthur
-      password: db1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/rest_with_spring_boot_arthur?useTimezone=true&serverTimezone=UTC
+    username: arthur
+    password: db1234
   jpa:
     hibernate:
       ddl-auto: update
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MYSQL8Dialect
-      show-sql: false
+        dialect: org.hibernate.dialect.MySQL8Dialect
+      show-sql: true
+      properties:
+        hibernate.format_sql: true
+        hibernate.generate_statistics: true
+      logging:
+        level:
+          org.hibernate.stat: debug
