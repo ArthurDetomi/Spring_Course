@@ -2,9 +2,9 @@ package br.com.arthur.controllers;
 
 import br.com.arthur.model.Person;
 import br.com.arthur.services.PersonServices;
-import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -43,8 +43,9 @@ public class PersonController {
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
-    public void delete(@PathParam(value = "id") Long id) {
+    public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) {
         personServices.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
 
