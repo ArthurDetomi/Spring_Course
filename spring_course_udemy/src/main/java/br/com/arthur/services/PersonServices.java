@@ -1,8 +1,10 @@
 package br.com.arthur.services;
 
 import br.com.arthur.data.vo.v1.PersonVO;
+import br.com.arthur.data.vo.v2.PersonVOV2;
 import br.com.arthur.exceptions.ResourceNotFoundException;
 import br.com.arthur.mapper.DozerMapper;
+import br.com.arthur.mapper.custom.PersonMapper;
 import br.com.arthur.model.Person;
 import br.com.arthur.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ public class PersonServices {
 
     @Autowired
     private PersonRepository personRepository;
+
+    @Autowired
+    private PersonMapper personMapper;
 
     public PersonVO findById(Long id) {
         logger.info("Finding one person!");
@@ -37,6 +42,12 @@ public class PersonServices {
         logger.info("Creating one person");
         var entity = DozerMapper.parseObject(person, Person.class);
         return DozerMapper.parseObject(personRepository.save(entity), PersonVO.class);
+    }
+
+    public PersonVOV2 createV2(PersonVOV2 person) {
+        logger.info("Creating one person v2");
+        Person entity = personMapper.convertVoToEntity(person);
+        return personMapper.convertEntityToVo(personRepository.save(entity));
     }
 
     public void delete(Long id) {
@@ -65,5 +76,6 @@ public class PersonServices {
         var vo = DozerMapper.parseObject(person, Person.class);
         return DozerMapper.parseObject(personRepository.save(vo), PersonVO.class);
     }
+
 
 }

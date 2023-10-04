@@ -1,6 +1,7 @@
 package br.com.arthur.controllers;
 
 import br.com.arthur.data.vo.v1.PersonVO;
+import br.com.arthur.data.vo.v2.PersonVOV2;
 import br.com.arthur.services.PersonServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -33,6 +34,13 @@ public class PersonController {
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public PersonVO create(@RequestBody PersonVO person) {
         return personServices.create(person);
+    }
+
+    @RequestMapping(value = "v2/create", method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    public PersonVOV2 createV2(@RequestBody PersonVOV2 person) {
+        return personServices.createV2(person);
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.PUT,
